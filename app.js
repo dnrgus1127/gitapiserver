@@ -7,11 +7,13 @@ const port = 48012;
 
 const api = "https://api.github.com/repos/dnrgus1127/TIL/git/trees/main?recursive=10";
 
+require('dotenv').config();
+
 let cachedata = null;
 const fetchData = async () => {
     const response = await axios.get(api, {
         headers: {
-            Authorization: "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",
+            Authorization: process.env.TOKEN,
         }
     })
     cachedata = response.data;
