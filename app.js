@@ -19,6 +19,8 @@ const fetchData = async () => {
     cachedata = response.data;
 }
 
+fetchData();
+
 setInterval(fetchData, 5 * 60 * 1000);
 
 app.use("/", (req, res, next) => {
