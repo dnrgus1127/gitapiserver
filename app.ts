@@ -105,12 +105,30 @@ app.get("/tree/:projectName", async (req: Request, res: Response, next: NextFunc
 let postList: Array<Tree> = [];
 
 const updatePost = async () => {
-  const tmpPostList = await fetchPosts();
-  postList = await postTimeUpdate(tmpPostList);
+  try {
+    const tmpPostList = await fetchPosts();
+    postList = await postTimeUpdate(tmpPostList);
+  } catch (err) {
+    console.log("자동 쿼리 에러");
+    console.log(err);
+  }
 };
 
 updatePost();
-setInterval(updatePost, 1000 * 60 * 10);
+setInterval(updatePost, 1000 * 60 * 30);
+
+const checkLate = async () => {
+  try {
+    const response: any = await axios.get("https://api.github.com/rate_limit", {
+      headers: {
+        Authorization: `token ${process.env.TOKEN}`,
+      },
+    });
+    console.log(response.resources.core);
+  } catch (err) {}
+};
+
+setInterval(checkLate, 1000 * 60 * 58);
 
 //-------------------------------------------------
 

@@ -93,11 +93,29 @@ app.get("/tree/:projectName", (req, res, next) => __awaiter(void 0, void 0, void
 // 포스트 데이터 자동 쿼리
 let postList = [];
 const updatePost = () => __awaiter(void 0, void 0, void 0, function* () {
-    const tmpPostList = yield fetchPosts();
-    postList = yield postTimeUpdate(tmpPostList);
+    try {
+        const tmpPostList = yield fetchPosts();
+        postList = yield postTimeUpdate(tmpPostList);
+    }
+    catch (err) {
+        console.log("자동 쿼리 에러");
+        console.log(err);
+    }
 });
 updatePost();
-setInterval(updatePost, 1000 * 60 * 10);
+setInterval(updatePost, 1000 * 60 * 30);
+const checkLate = () => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const response = yield axios.get("https://api.github.com/rate_limit", {
+            headers: {
+                Authorization: `token ${process.env.TOKEN}`,
+            },
+        });
+        console.log(response.resources.core);
+    }
+    catch (err) { }
+});
+setInterval(checkLate, 1000 * 60 * 58);
 //-------------------------------------------------
 // Blog
 app.get("/postList", (req, res) => {
