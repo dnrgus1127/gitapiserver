@@ -113,7 +113,9 @@ const checkLate = () => __awaiter(void 0, void 0, void 0, function* () {
         });
         console.log(response.resources.core);
     }
-    catch (err) { }
+    catch (err) {
+        console.log(err);
+    }
 });
 setInterval(checkLate, 1000 * 60 * 58);
 //-------------------------------------------------

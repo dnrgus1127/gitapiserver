@@ -125,7 +125,9 @@ const checkLate = async () => {
       },
     });
     console.log(response.resources.core);
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 setInterval(checkLate, 1000 * 60 * 58);
