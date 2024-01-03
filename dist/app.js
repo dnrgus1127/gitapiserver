@@ -37,11 +37,9 @@ app.use("/", (req, res, next) => {
     const today = new Date();
     console.log({
         ip: req.ip,
-        time: today.getMilliseconds(),
+        time: today,
         uri: req.url.split("?")[0],
         method: req.method,
-        query: req.query,
-        body: req.body,
     });
     next();
 });

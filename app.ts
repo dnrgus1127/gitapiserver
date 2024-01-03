@@ -35,14 +35,11 @@ app.use(cors(corsOption));
 
 app.use("/", (req: Request, res: Response, next: NextFunction) => {
   const today = new Date();
-
   console.log({
     ip: req.ip,
-    time: today.getMilliseconds(),
+    time: today,
     uri: req.url.split("?")[0],
     method: req.method,
-    query: req.query,
-    body: req.body,
   });
   next();
 });
