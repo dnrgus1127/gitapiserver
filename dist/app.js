@@ -111,7 +111,7 @@ const checkLate = () => __awaiter(void 0, void 0, void 0, function* () {
                 Authorization: `token ${process.env.TOKEN}`,
             },
         });
-        console.log(response.resources.core);
+        console.log(response.data.resources.core);
     }
     catch (err) {
         console.log(err);

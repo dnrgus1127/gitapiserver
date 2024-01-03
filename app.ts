@@ -124,7 +124,7 @@ const checkLate = async () => {
         Authorization: `token ${process.env.TOKEN}`,
       },
     });
-    console.log(response.resources.core);
+    console.log(response.data.resources.core);
   } catch (err) {
     console.log(err);
   }
