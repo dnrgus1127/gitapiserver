@@ -35,13 +35,16 @@ const fetchData = async (api: string, storage: GithubDataType) => {
   }
 };
 
+const EXCLUSTION_POSTS = ["README.md"];
 const fetchPosts = async () => {
   const response: AxiosResponse = await getAxiosWithToken(
     "https://api.github.com/repos/dnrgus1127/TIL/git/trees/main?recursive=10"
   );
 
   const tree = response.data.tree;
-  return tree.filter((node: Tree) => node.type === "blob");
+  return tree
+    .filter((node: Tree) => node.type === "blob")
+    .filter((node: Tree) => !EXCLUSTION_POSTS.includes(node.path));
 };
 
 const postTimeUpdate = async (postList: Array<Tree>) => {

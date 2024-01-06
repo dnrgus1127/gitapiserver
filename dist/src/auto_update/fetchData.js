@@ -38,10 +38,13 @@ const fetchData = (api, storage) => __awaiter(void 0, void 0, void 0, function* 
         console.log("API LIMIT", response.status);
     }
 });
+const EXCLUSTION_POSTS = ["README.md"];
 const fetchPosts = () => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield getAxiosWithToken("https://api.github.com/repos/dnrgus1127/TIL/git/trees/main?recursive=10");
     const tree = response.data.tree;
-    return tree.filter((node) => node.type === "blob");
+    return tree
+        .filter((node) => node.type === "blob")
+        .filter((node) => !EXCLUSTION_POSTS.includes(node.path));
 });
 const postTimeUpdate = (postList) => __awaiter(void 0, void 0, void 0, function* () {
     const postPathList = postList.map((post) => post.path);

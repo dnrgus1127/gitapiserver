@@ -96,10 +96,10 @@ const updatePost = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const tmpPostList = yield fetchPosts();
         postList = yield postTimeUpdate(tmpPostList);
+        console.log("포스트 자동 쿼리 성공");
     }
     catch (err) {
-        console.log("자동 쿼리 에러");
-        console.log(err);
+        console.log("포스트 자동 쿼리 에러");
     }
 });
 updatePost();

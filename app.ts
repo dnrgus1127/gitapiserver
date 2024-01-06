@@ -108,9 +108,9 @@ const updatePost = async () => {
   try {
     const tmpPostList = await fetchPosts();
     postList = await postTimeUpdate(tmpPostList);
+    console.log("포스트 자동 쿼리 성공");
   } catch (err) {
-    console.log("자동 쿼리 에러");
-    console.log(err);
+    console.log("포스트 자동 쿼리 에러");
   }
 };
 
